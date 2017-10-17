@@ -27,7 +27,7 @@ module.exports = function(app, passport) {
     app.get('/auth/google/callback',
             passport.authenticate('google', {
                     successRedirect : '/',
-                    failureRedirect : '/'
+                    failureRedirect : '/login'
             }));
 
     // GITHUB ROUTES
@@ -36,13 +36,13 @@ module.exports = function(app, passport) {
     app.get('/auth/github/callback',
             passport.authenticate('github', {
                     successRedirect : '/',
-                    failureRedirect : '/'
+                    failureRedirect : '/login'
             }));
 
 	// The "catchall" handler: for any request that doesn't
 	// match one above, send back React's index.html file.
 	app.get('*', (req, res) => {
-	  res.sendFile(path.join(__dirname+'/../client/build/index.html'));
+	    res.sendFile(path.join(__dirname+'/../client/build/index.html'));
 	});
 
 }

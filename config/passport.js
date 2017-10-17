@@ -154,11 +154,11 @@ module.exports = function(passport) {
 
     },
     function(req, token, refreshToken, profile, done) {
-
         // asynchronous
         process.nextTick(function() {
 
             // check if the user is already logged in
+            // if not logged in
             if (!req.user) {
 
                 User.findOne({ 'google.id' : profile.id }, function(err, user) {
@@ -201,7 +201,7 @@ module.exports = function(passport) {
 
             } else {
                 // user already exists and is logged in, we have to link accounts
-                var user               = req.user; // pull the user out of the session
+                var user = req.user; // pull the user out of the session
 
                 user.google.id    = profile.id;
                 user.google.token = token;

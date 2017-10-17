@@ -17,6 +17,8 @@ class NavComponent extends Component {
           <Container>
             <Menu.Item as={Link} to='/' name='home' active={activeItem === 'home'} onClick={this.handleItemClick}>
             </Menu.Item>
+            <Menu.Item position='right' name={this.props.user.name}>
+            </Menu.Item>
             <Menu.Menu position='right' as={Link} to='/login' name='login' onClick={this.handleItemClick}>
               <Button primary>Login</Button>
             </Menu.Menu>
