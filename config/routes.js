@@ -11,6 +11,12 @@ module.exports = function(app, passport) {
 
     // User api
     app.get('/api/user', function(req, res) {
+        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3001')
+        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
+        res.setHeader('Access-Control-Allow-Methods', 'GET')
+        res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
+        res.setHeader('Access-Control-Allow-Credentials', true);
+
         if(req.user) {
             res.json(req.user)
         } else {

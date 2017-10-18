@@ -20,7 +20,14 @@ class App extends Component {
 
   //get data from express api and store in state
   loadData() {
-    fetch('http://127.0.0.1:3001/api/user')
+    fetch('http://127.0.0.1:3001/api/user', {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      mode: 'cors'
+    })
       .then((response) => {
         if(!response.ok) {
           throw Error(response.statusText)
