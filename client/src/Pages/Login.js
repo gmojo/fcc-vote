@@ -10,17 +10,13 @@ class Login extends Component {
 
 				<h1>Login or sign-up for a new account</h1>
 
-				<a href="http://localhost:3001/auth/google">
-				    <Button color='google plus'>
-				        <Icon name='google plus' /> Google+
-				    </Button>
-			    </a>
+			    <Button as='a' href='http://localhost:3001/auth/google' color='google plus'>
+			        <Icon name='google plus' /> Google+
+			    </Button>
 
-			    <a href="http://localhost:3001/auth/github">
-				    <Button color='black'>
-				    	<Icon name='github' /> Github
-				    </Button>
-			    </a>
+			    <Button as='a' href='http://localhost:3001/auth/github' color='black'>
+			    	<Icon name='github' /> Github
+			    </Button>
 
 			</Container>
 		)

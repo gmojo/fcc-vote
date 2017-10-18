@@ -26,7 +26,7 @@ class App extends Component {
       headers: {
         'Content-Type': 'application/json'
       },
-      mode: 'cors'
+      mode: 'no-cors'
     })
       .then((response) => {
         if(!response.ok) {
