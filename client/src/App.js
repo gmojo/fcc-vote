@@ -3,7 +3,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { Route } from 'react-router-dom'
 import NavComponent from './Components/Navbar.js';
 import Home from './Pages/Home.js';
-import Login from './Pages/Login.js';
 
 class App extends Component {
   state = {
@@ -56,7 +55,6 @@ class App extends Component {
           <NavComponent isAuth={isAuth} user={user} />
           <main>
             <Route exact path="/" component={Home} />
-            <Route exact path="/login" component={Login} />
           </main>
         </div>
       </BrowserRouter>

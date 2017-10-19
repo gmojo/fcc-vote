@@ -12,23 +12,27 @@ class NavComponent extends Component {
     const { activeItem } = this.state
 
     return (
-      <Segment>
-        <Menu secondary>
-          <Container>
-            <Menu.Item as={Link} to='/' name='home' active={activeItem === 'home'} onClick={this.handleItemClick}>
-            </Menu.Item>
-            <Menu.Menu position='right'>
-              <Menu.Item name='Login'></Menu.Item>
-              <Button as='a' href='http://localhost:3001/auth/google' color='google plus'>
-                  <Icon name='google plus' /> Google+
-              </Button>
-              <Button as='a' href='http://localhost:3001/auth/github' color='black'>
-                <Icon name='github' /> Github
-              </Button>
-            </Menu.Menu>
-          </Container>
-        </Menu>
-      </Segment>
+          <Segment
+            inverted
+            textAlign='center'
+            vertical
+          >
+            <Container>
+              <Menu inverted secondary>
+                <Menu.Item as={Link} to='/' name='home' active={activeItem === 'home'} onClick={this.handleItemClick} />
+                <Menu.Item position='right'>
+                  <Menu.Item name={this.props.user.name || 'Login'}></Menu.Item>
+                  <Button as='a' href='http://localhost:3001/auth/google' color='google plus'>
+                    <Icon name='google plus' /> Google+
+                  </Button>
+                  <Button inverted style={{ marginLeft: '0.5em' }} as='a' href='http://localhost:3001/auth/github' color='black'>
+                    <Icon name='github' /> Github
+                  </Button>
+                </Menu.Item>
+              </Menu>
+            </Container>
+
+          </Segment>
     )
   }
 }
