@@ -10,14 +10,3 @@ User stories:
 6. As an unauthenticated or authenticated user, I can see and vote on everyone's polls.
 7. As an unauthenticated or authenticated user, I can see the results of polls in chart form. (This could be implemented using Chart.js or Google Charts.)
 8. As an authenticated user, if I don't like the options on a poll, I can create a new option.
-
-
-To do:
-1. Form validation for new polls
-2. Create individual poll page
-2.1 Table results on poll page
-2.2 Vote on poll items
-3. Only authenticated users to create polls and vote (Passport Twiter & Github)
-4. Complete about page
-5. Refactor with Mongoose?
-6. Refactor with Redux?

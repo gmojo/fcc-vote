@@ -3,6 +3,8 @@ import { BrowserRouter } from 'react-router-dom';
 import { Route } from 'react-router-dom'
 import NavComponent from './Components/Navbar.js';
 import Home from './Pages/Home.js';
+import About from './Pages/About.js';
+import Poll from './Pages/Poll.js';
 
 class App extends Component {
   state = {
@@ -37,8 +39,8 @@ class App extends Component {
         this.setState({
           isAuth: true,
           user: {
-            email: data.google.email,
-            name: data.google.name
+            email: data.google.email || data.github.email,
+            name: data.google.name || data.github.name
           }
         })
       })
@@ -55,6 +57,8 @@ class App extends Component {
           <NavComponent isAuth={isAuth} user={user} />
           <main>
             <Route exact path="/" component={Home} />
+            <Route exact path="/about" component={About} />
+            <Route path="/poll/:pollId" component={Poll} />
           </main>
         </div>
       </BrowserRouter>
