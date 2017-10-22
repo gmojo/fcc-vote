@@ -13,7 +13,13 @@ class NewOption extends Component {
 	handleChange = (e, { name, value }) => this.setState({ [name]: value })
 
 	//Open modal
-  	handleOpen = () => this.setState({ modalOpen: true })
+  	handleOpen = () => {
+  		if(!this.props.isAuth) {
+  			alert('Please login first')
+  		} else {
+  			this.setState({ modalOpen: true })
+  		}	
+  	}
 
   	//Close modal and reset state values
 	handleClose = () => {

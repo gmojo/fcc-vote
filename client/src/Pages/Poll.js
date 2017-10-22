@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import PollResult from '../Components/PollResult.js'
 import NewOption from '../Components/NewOption.js'
-import { Container, Loader, Form } from 'semantic-ui-react'
+import { Container, Loader, Form, Grid } from 'semantic-ui-react'
+import { Share } from 'react-twitter-widgets'
 
 //Remove default values in state - no longer needed
-//Ensure users only vote once - save names in database?
 
 class Poll extends Component {
 	state = {
 		vote: '',
 		voted: false,
 		single: true,
+		totalVotes: 0,
 		options: [],
 		poll: {
 			pollData: [{key: '', value: 10}],
@@ -20,8 +21,10 @@ class Poll extends Component {
 		}
 	}
 
+	// Update state with selected vote values
 	handleChange = (e, { value }) => this.setState({ vote: value })
 
+	// Submit vote to api and re-render
 	handleSubmit = (event) => {
 		event.preventDefault();
 
@@ -70,33 +73,64 @@ class Poll extends Component {
 					key: item.key, text: item.key, value: item.key
 				}
 			})
-			this.setState({poll: data, options})
+
+			let totalVotes = data.pollData.reduce((total, value) => (total + value.value), 0)
+
+			this.setState({poll: data, options, totalVotes})
+			document.title = this.state.poll.pollName;
 		})
 		.catch((err) => console.log(err))
 
 	}
 
 
+	// Check if request is from poll owner and if true then delete
+	handleDelete = (event) => {
+		if(!this.props.isAuth) {
+			alert('Please login first')
+		} else {
+			event.preventDefault();
+			let {poll} = this.state
+
+			//check requester and poll owner match
+
+			fetch('/api/delete/' + poll._id, {
+				credentials: 'include',
+				method: 'DELETE'
+			})
+		    .then((res) => {
+		    	this.props.history.push('/');
+		    })
+		    .catch((err) => console.log(err))
+		}
+	}
+
+
 	render() {
-		const {poll, single, options, voted} = this.state
+		const {poll, single, options, voted, totalVotes} = this.state
+		const pollId = this.props.match.params.pollId
 
 		//Show loading icon if fetched data has not yet returned and saved to state
 		if(poll.pollName === '') {
 			return <Loader active inline='centered'>Loading</Loader>
 		} else {
 			return(
-				<Container style={{ marginTop: '2em' }}>
-					<h1>{poll.pollName}</h1>
+				<Container textAlign='center' style={{ marginTop: '0.5em' }}>
+					<h2>{poll.pollName}</h2>
 					<p>created by {poll.createdBy} on {poll.createdOn}</p>
-					<p>Total votes cast: 30</p>
+					<p>Total votes cast: {totalVotes}</p>
+					<Share url={'http://localhost:3000/Poll/' + pollId} />
 					<PollResult poll={poll} single={single} />
-					<Form>
-						<Form.Group inline>
-							<Form.Select options={options} placeholder='Options' onChange={this.handleChange} />
-							<Form.Button positive disabled={voted} onClick={this.handleSubmit}>Vote</Form.Button>
-							<NewOption pollId={poll._id} loadData={this.loadData.bind(this)} />
-						</Form.Group>
-					</Form>
+					<Grid centered style={{ marginTop: '0.5em' }}>
+						<Form>
+							<Form.Group inline>
+								<Form.Select options={options} placeholder='Options' onChange={this.handleChange} />
+								<Form.Button positive disabled={voted} onClick={this.handleSubmit}>Vote</Form.Button>
+								<NewOption pollId={poll._id} loadData={this.loadData.bind(this)} />
+								<Form.Button negative onClick={this.handleDelete}>Delete</Form.Button>
+							</Form.Group>
+						</Form>
+					</Grid>
 				</Container>
 			)
 		}

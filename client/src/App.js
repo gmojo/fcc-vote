@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Route } from 'react-router-dom'
 import NavComponent from './Components/Navbar.js';
+import Footer from './Components/Footer.js';
 import Home from './Pages/Home.js';
 import About from './Pages/About.js';
 import Poll from './Pages/Poll.js';
@@ -60,6 +61,7 @@ class App extends Component {
             <Route exact path="/about" component={About} />
             <Route path="/poll/:pollId" component={Poll} />
           </main>
+          <Footer />
         </div>
       </BrowserRouter>
     )

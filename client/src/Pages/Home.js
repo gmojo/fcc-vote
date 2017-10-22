@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PollResult from '../Components/PollResult.js'
 import NewPoll from '../Components/NewPoll.js'
-import { Grid, Container, Header, Icon } from 'semantic-ui-react'
+import { Grid, Container } from 'semantic-ui-react'
+import '../App.css';
 
 class Home extends Component {
 	state = {
@@ -39,18 +40,13 @@ class Home extends Component {
 		const {polls} = this.state
 
 		return(
-			<Container style={{ marginTop: '2em' }} textAlign='center'>
+			<Container style={{ marginTop: '0.5em' }} textAlign='center'>
 
-			    <Header as='h2' icon textAlign='center'>			      
-			      <Header.Content>
-			        VOTE
-			      </Header.Content>
-			      <Icon name='checkmark' circular />
-			    </Header>
+				<h1>VOTING APP</h1>
 
 				<NewPoll loadData={this.loadData.bind(this)} />
 
-				<Grid columns={3} padded centered stackable>
+				<Grid columns={3} padded centered stackable verticalAlign='middle'>
 					{polls.map(poll => (
 						<Grid.Column key={poll._id}>
 							<PollResult poll={poll} />

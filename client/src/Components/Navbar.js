@@ -29,18 +29,15 @@ class NavComponent extends Component {
     const { activeItem } = this.state
 
     return (
-          <Segment
-            inverted
-            textAlign='center'
-            vertical
-          >
+          <Segment inverted>
+          
             <Container>
               <Menu inverted secondary>
                 <Menu.Item as={Link} to='/' name='home' active={activeItem === 'home'} onClick={this.handleItemClick} />
                 <Menu.Item as={Link} to='/about' name='about' active={activeItem === 'about'} onClick={this.handleItemClick} />
                 <Menu.Item position='right'>
                   <Menu.Item name={this.props.user.name || 'Login'}></Menu.Item>
-                  <AuthButtons />
+                  <AuthButtons isAuth={this.props.isAuth} />
                 </Menu.Item>
               </Menu>
             </Container>

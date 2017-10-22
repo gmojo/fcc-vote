@@ -46,6 +46,23 @@ module.exports = function(app, passport) {
 
     })
 
+    // Delete single poll based on ID
+    app.delete('/api/delete/:id', function(req, res) {
+        let pollId = new ObjectID(req.params.id)
+
+        Poll.findById(pollId, function (err, poll){
+            if(err) {
+                res.send(err)
+            }
+            poll.remove(function(err) {
+                if(err) {
+                    res.send(err)
+                }
+                res.sendStatus(200)
+            })
+        });
+    })
+
     // Vote in poll
     app.post('/api/vote/:id', function(req, res) {
         let option = req.body.option

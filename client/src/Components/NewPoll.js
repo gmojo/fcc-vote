@@ -12,7 +12,13 @@ class NewPoll extends Component {
   }
 
   //open modal
-    handleOpen = () => this.setState({ modalOpen: true })
+  handleOpen = () => {
+    if(this.props.isAuth) {
+      this.setState({ modalOpen: true })
+    } else {
+      alert('Please login first')
+    }
+  }
 
 
   //Close modal and reset state values
@@ -101,9 +107,9 @@ class NewPoll extends Component {
 
      for(let i = 0; i < this.state.count; i++){
            uiItems.push(
-               <Form.Group key={i} widths='equal'>
-                 <Form.Input index={i} name='newLabels' value={newLabels[i] ? newLabels[i] : ''} onChange={this.handleChange} />
-                 <Form.Input index={i} name='newValues' value={newValues[i] ? newValues[i] : ''} onChange={this.handleChange} />
+               <Form.Group key={i}>
+                 <Form.Input index={i} name='newLabels' value={newLabels[i] ? newLabels[i] : ''} onChange={this.handleChange} width={4} />
+                 <Form.Input index={i} name='newValues' value={newValues[i] ? newValues[i] : ''} onChange={this.handleChange} width={2} />
                  {i > 1 &&
                  <Button negative icon index={i} size="mini" onClick={this.removeClick}><Icon name='delete' /></Button>
                   }
@@ -133,13 +139,13 @@ class NewPoll extends Component {
                   name='newCreatedBy' 
                   onChange={this.handleChange}
                 />
-                <Grid columns='equal'>
-                  <Grid.Column><strong>Labels</strong></Grid.Column>
-                  <Grid.Column><strong>Values</strong></Grid.Column>
+                <Grid>
+                  <Grid.Column width={4}><strong>Labels</strong></Grid.Column>
+                  <Grid.Column width={2}><strong>Values</strong></Grid.Column>
                 </Grid>                  
                 {this.createUI()}
                 <Message info>
-                  <p>Set initial values above or 0</p>
+                  <p>Set initial values or leave blank</p>
                 </Message>
                 <Button positive onClick={this.addClick}>Add Item</Button>
               </Form>
