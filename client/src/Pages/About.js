@@ -19,6 +19,14 @@ class About extends Component {
 					<List.Item>As an unauthenticated or authenticated user, I can see the results of polls in chart form.</List.Item>
 					<List.Item>As an authenticated user, if I don't like the options on a poll, I can create a new option.</List.Item>
 				</List>
+				<h3>Built using</h3>
+				<List bulleted>
+					<List.Item>Express for API backend</List.Item>
+					<List.Item>MongoDB/Mongoose for poll and user database</List.Item>
+					<List.Item>Passport for authentication</List.Item>
+					<List.Item>React for front-end</List.Item>
+					<List.Item>Semantic UI</List.Item>
+				</List>
 			</Container>
 		)
 	}

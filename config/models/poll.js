@@ -4,6 +4,7 @@ var pollSchema = mongoose.Schema({
 
     pollName: String,
     createdBy: String,
+    createdById: String,
     createdOn: {type: Date, default: Date.now},
     votesCast: [{by: String, option: String}],
     pollData: [{key: String, value: Number}]

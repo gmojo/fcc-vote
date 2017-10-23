@@ -44,7 +44,7 @@ class Home extends Component {
 
 				<h1>VOTING APP</h1>
 
-				<NewPoll loadData={this.loadData.bind(this)} />
+				<NewPoll isAuth={this.props.isAuth} user={this.props.user} loadData={this.loadData.bind(this)} />
 
 				<Grid columns={3} padded centered stackable verticalAlign='middle'>
 					{polls.map(poll => (

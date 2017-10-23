@@ -13,7 +13,8 @@ class App extends Component {
     isAuth: false,
     user: {
       email: '',
-      name: ''
+      name: '',
+      id: ''
     }
   }
 
@@ -42,7 +43,8 @@ class App extends Component {
           isAuth: true,
           user: {
             email: data.google.email || data.github.email,
-            name: data.google.name || data.github.name
+            name: data.google.name || data.github.name,
+            id: data.google.id || data.github.id
           }
         })
       })
@@ -58,9 +60,9 @@ class App extends Component {
         <div className="App">
           <NavComponent isAuth={isAuth} user={user} />
           <main className="App-content">
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" render={props => <Home isAuth={isAuth} user={user} {...props} />} />
             <Route exact path="/about" component={About} />
-            <Route path="/poll/:pollId" component={Poll} />
+            <Route path="/poll/:pollId" render={props => <Poll isAuth={isAuth} user={user} {...props} />} />
           </main>
           <Footer />
         </div>

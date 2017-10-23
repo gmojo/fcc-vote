@@ -34,6 +34,7 @@ module.exports = function(app, passport) {
 
         newPoll.pollName = req.body.pollName
         newPoll.createdBy = req.body.createdBy
+        newPoll.createdById = req.body.createdById
         newPoll.pollData = req.body.pollData
 
         newPoll.save(function(err, doc) {

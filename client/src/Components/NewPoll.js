@@ -89,6 +89,7 @@ class NewPoll extends Component {
     let newPoll = {
       "pollName": newTitle,
       "createdBy": newCreatedBy,
+      "createdById": this.props.user.id,
       "pollData": newPollData
     }
 

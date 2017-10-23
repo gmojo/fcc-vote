@@ -104,6 +104,8 @@ class Poll extends Component {
 	handleDelete = (event) => {
 		if(!this.props.isAuth) {
 			alert('Please login first')
+		} else if(this.props.user.id !== this.state.poll.createdById) {
+			alert('You must be the owner to delete the poll. Please make sure you are logged in with the account used when the poll was created')
 		} else {
 			event.preventDefault();
 			let {poll} = this.state
@@ -142,7 +144,7 @@ class Poll extends Component {
 							<Form.Group inline>
 								<Form.Select options={options} placeholder='Options' onChange={this.handleChange} />
 								<Form.Button positive disabled={voted} onClick={this.handleSubmit}>Vote</Form.Button>
-								<NewOption pollId={poll._id} loadData={this.loadData.bind(this)} />
+								<NewOption isAuth={this.props.isAuth} user={this.props.user} pollId={poll._id} loadData={this.loadData.bind(this)} />
 								<Form.Button negative onClick={this.handleDelete}>Delete</Form.Button>
 							</Form.Group>
 						</Form>
