@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Route } from 'react-router-dom'
+import './App.css';
 import NavComponent from './Components/Navbar.js';
 import Footer from './Components/Footer.js';
 import Home from './Pages/Home.js';
@@ -56,7 +57,7 @@ class App extends Component {
       <BrowserRouter>
         <div className="App">
           <NavComponent isAuth={isAuth} user={user} />
-          <main>
+          <main className="App-content">
             <Route exact path="/" component={Home} />
             <Route exact path="/about" component={About} />
             <Route path="/poll/:pollId" component={Poll} />

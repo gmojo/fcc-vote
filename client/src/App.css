@@ -9,3 +9,14 @@ h2 {
 	text-align: center;
   	font-family: 'Bungee Shade', cursive;
 }
+
+.App {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.App-content {
+  flex: 1;
+  margin-bottom: 5em;
+}

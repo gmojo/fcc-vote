@@ -21,6 +21,22 @@ class Poll extends Component {
 		}
 	}
 
+	formatDate = (date) => {
+		let newDate = new Date(date)
+		let monthNames = [
+			"January", "February", "March",
+			"April", "May", "June", "July",
+			"August", "September", "October",
+			"November", "December"
+		];
+
+		let day = newDate.getDate();
+		let monthIndex = newDate.getMonth();
+		let year = newDate.getFullYear();
+
+		return day + ' ' + monthNames[monthIndex] + ' ' + year;
+	}
+
 	// Update state with selected vote values
 	handleChange = (e, { value }) => this.setState({ vote: value })
 
@@ -117,7 +133,7 @@ class Poll extends Component {
 			return(
 				<Container textAlign='center' style={{ marginTop: '0.5em' }}>
 					<h2>{poll.pollName}</h2>
-					<p>created by {poll.createdBy} on {poll.createdOn}</p>
+					<p>created by {poll.createdBy} on {this.formatDate(poll.createdOn)}</p>
 					<p>Total votes cast: {totalVotes}</p>
 					<Share url={'http://localhost:3000/Poll/' + pollId} />
 					<PollResult poll={poll} single={single} />

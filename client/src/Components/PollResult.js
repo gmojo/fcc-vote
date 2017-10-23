@@ -21,7 +21,7 @@ class PollResult extends Component {
 		  <Segment>
 		  	{!single && <Header>{poll.pollName}</Header>}
 		  	{poll.pollData.map((result, index) => (
-		    <Progress key={result.key} percent={Math.floor(result.value / pollTotalValues * 100)} color={colours[index]} progress>
+		    <Progress key={result.key} percent={Math.floor(result.value / pollTotalValues * 100) || 0} color={colours[index]} progress>
 		      {result.key}
 		    </Progress>
 		    ))}

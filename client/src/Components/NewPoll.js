@@ -8,7 +8,8 @@ class NewPoll extends Component {
     newTitle: '',
     newLabels: [],
     newValues: [],
-    newCreatedBy: ''
+    newCreatedBy: '',
+    formWarning: true
   }
 
   //open modal
@@ -29,7 +30,8 @@ class NewPoll extends Component {
       newTitle: '',
       newLabels: [],
       newValues: [],
-      newCreatedBy: ''
+      newCreatedBy: '',
+      formWarning: false
      })
   }
 
@@ -44,17 +46,44 @@ class NewPoll extends Component {
     }
   }
 
+  // Form validation function
+  validateForm = () => {
+    let {newTitle, newCreatedBy, newLabels, newValues} = this.state
+
+    // check for empty fields
+    if(newTitle === '' || newCreatedBy === '' || newLabels.length === 0) {
+      this.setState({formWarning: false})
+      return
+    }
+
+    // Check for empty labels
+    if(newLabels.includes(null) || newLabels.includes('')) {
+      this.setState({formWarning: false})
+      return
+    }
+
+    // if checks pass update values and submit data
+    let validatedValues = newValues.map(value => {
+      if(isNaN(value)) {
+        return 0
+      } else {
+        return value
+      }
+    })      
+
+    this.setState({newValues: validatedValues})
+    this.handleSubmit()
+  }
+
 
   //Handle submit for new poll - send post request to express api
-  //labels/values should not be undefined or null
-  //all values be numbers
   //newLabels and newValues > 1 && length = length
   handleSubmit = () => {
     let {newTitle, newCreatedBy, newLabels, newValues} = this.state
     let newPollData = []
 
     for(let i=0; i < newLabels.length; i++) {
-      newPollData.push({"key": newLabels[i], "value": parseInt(newValues[i], 10)})
+      newPollData.push({"key": newLabels[i], "value": parseInt(newValues[i], 10) || 0})
     }
 
     let newPoll = {
@@ -120,11 +149,12 @@ class NewPoll extends Component {
   }
 
 	render() {
+    const {formWarning, modalOpen} = this.state
 
 	    return (
           <Modal 
           	trigger={<Button positive size='large' onClick={this.handleOpen}>Create New Poll</Button>}
-          	open={this.state.modalOpen}
+          	open={modalOpen}
           >
             <Modal.Content>
               <Header>Create New Poll</Header>
@@ -144,15 +174,15 @@ class NewPoll extends Component {
                   <Grid.Column width={2}><strong>Values</strong></Grid.Column>
                 </Grid>                  
                 {this.createUI()}
-                <Message info>
-                  <p>Set initial values or leave blank</p>
-                </Message>
                 <Button positive onClick={this.addClick}>Add Item</Button>
+                <Message negative hidden={formWarning}>
+                  <p>All fields must be completed. Values left blank will default to 0</p>
+                </Message>
               </Form>
             </Modal.Content>
             <Modal.Actions>
               <Button.Group>
-                <Button positive onClick={this.handleSubmit}>Submit</Button>
+                <Button positive onClick={this.validateForm}>Submit</Button>
                 <Button.Or />
                 <Button negative onClick={this.handleClose}>Cancel</Button>
               </Button.Group>

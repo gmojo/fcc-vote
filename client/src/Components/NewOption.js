@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, Form, Header, Button } from 'semantic-ui-react'
+import { Modal, Form, Header, Button, Message } from 'semantic-ui-react'
 
 //handleSubmit function to add new values to database
 
@@ -7,7 +7,8 @@ class NewOption extends Component {
 	state = {
 		label: '',
 		value: 0,
-		modalOpen: false
+		modalOpen: false,
+		formWarning: true
 	}
 
 	handleChange = (e, { name, value }) => this.setState({ [name]: value })
@@ -26,8 +27,18 @@ class NewOption extends Component {
 		this.setState({ 
 			modalOpen: false,
 			label: '',
-			value: 0
+			value: 0,
+			formWarning: true
 		 })
+	}
+
+	validateForm = () => {
+		if(this.state.label === '') {
+			this.setState({formWarning: false})
+			return
+		} else {
+			this.handleSubmit()
+		}
 	}
 
 	handleSubmit = (event) => {
@@ -70,10 +81,13 @@ class NewOption extends Component {
 					<Form.Input label='Value' name='value' onChange={this.handleChange} />
 				</Form.Group>
               </Form>
+              	<Message negative hidden={this.state.formWarning}>
+                  <p>Please enter an option. Values left blank will default to 0</p>
+                </Message>
             </Modal.Content>
             <Modal.Actions>
               <Button.Group>
-                <Button positive onClick={this.handleSubmit}>Submit</Button>
+                <Button positive onClick={this.validateForm}>Submit</Button>
                 <Button.Or />
                 <Button negative onClick={this.handleClose}>Cancel</Button>
               </Button.Group>
