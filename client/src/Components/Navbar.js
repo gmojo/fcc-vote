@@ -8,10 +8,10 @@ function AuthButtons(props) {
   } 
   return (
     <div>
-      <Button as='a' href='https://fcc-gmojo-vote.herokuapp.com/auth/google/callback' color='google plus'>
+      <Button as='a' href='https://fcc-gmojo-vote.herokuapp.com/auth/google' color='google plus'>
         <Icon name='google plus' /> Google+
       </Button>
-      <Button inverted style={{ marginLeft: '0.5em' }} as='a' href='https://fcc-gmojo-vote.herokuapp.com/auth/github/callback' color='black'>
+      <Button inverted style={{ marginLeft: '0.5em' }} as='a' href='https://fcc-gmojo-vote.herokuapp.com/auth/github' color='black'>
         <Icon name='github' /> Github
       </Button>
     </div>
