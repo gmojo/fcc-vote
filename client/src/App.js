@@ -24,7 +24,7 @@ class App extends Component {
 
   //get data from express api and store in state
   loadData() {
-    fetch('http://127.0.0.1:3001/api/user', {
+    fetch('/api/user', {
       method: 'GET',
       credentials: 'include',
       headers: {
