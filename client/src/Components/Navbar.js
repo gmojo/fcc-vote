@@ -4,14 +4,14 @@ import { Segment, Menu, Button, Container, Icon } from 'semantic-ui-react'
 
 function AuthButtons(props) {
   if(props.isAuth) {
-    return <Button negative style={{ marginLeft: '0.5em' }} as='a' href='https://fcc-gmojo-vote.herokuapp.com:3001/logout'>Logout</Button>
+    return <Button negative style={{ marginLeft: '0.5em' }} as='a' href='/logout'>Logout</Button>
   } 
   return (
     <div>
-      <Button as='a' href='https://fcc-gmojo-vote.herokuapp.com:3001/auth/google' color='google plus'>
+      <Button as='a' href='/auth/google' color='google plus'>
         <Icon name='google plus' /> Google+
       </Button>
-      <Button inverted style={{ marginLeft: '0.5em' }} as='a' href='https://fcc-gmojo-vote.herokuapp.com:3001/auth/github' color='black'>
+      <Button inverted style={{ marginLeft: '0.5em' }} as='a' href='/auth/github' color='black'>
         <Icon name='github' /> Github
       </Button>
     </div>
