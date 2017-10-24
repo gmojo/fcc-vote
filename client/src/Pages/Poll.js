@@ -137,7 +137,7 @@ class Poll extends Component {
 					<h2>{poll.pollName}</h2>
 					<p>created by {poll.createdBy} on {this.formatDate(poll.createdOn)}</p>
 					<p>Total votes cast: {totalVotes}</p>
-					<Share url={'http://localhost:3000/Poll/' + pollId} />
+					<Share url={'https://fcc-gmojo-vote.herokuapp.com/Poll/' + pollId} />
 					<PollResult poll={poll} single={single} />
 					<Grid centered style={{ marginTop: '0.5em' }}>
 						<Form>
