@@ -1,6 +1,7 @@
-FreeCodeCamp: Voting App in React
+# FreeCodeCamp: Voting App in React
 
-User stories:
+----
+## User stories:
 
 1. As an authenticated user, I can keep my polls and come back later to access them.
 2. As an authenticated user, I can share my polls with my friends.
@@ -11,3 +12,30 @@ User stories:
 7. As an unauthenticated or authenticated user, I can see the results of polls in chart form. (This could be implemented using Chart.js or Google Charts.)
 8. As an authenticated user, if I don't like the options on a poll, I can create a new option.
 
+----
+## Built using
+
+* Express for API backend
+* MongoDB/Mongoose for poll and user database
+* Passport for authentication
+* React for front-end
+* Semantic UI
+
+----
+## Clone
+
+1. Clone repo
+2. npm install
+3. cd client && npm install && npm run build
+
+In development you need to run both the express server and the react app.  Run npm start from the root folder and client folder in separate consoles.
+
+### Environment variables
+* MONGODB_URI
+* SESSION_SECRET
+* googleClientID
+* googleClientSecret
+* googleCallbackURL
+* githubClientID
+* githubClientSecret
+* githubCallbackURL
